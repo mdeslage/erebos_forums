@@ -3,8 +3,8 @@ var app = angular.module('forumApp');
 
 app.factory('thread', ['$http', function($http) {
     var obj = {
-
-        threads: [
+        threads: [],
+        testThreads: [
             {
                 title: 'This is a General test thread',
                 author: 'Mike',
@@ -68,16 +68,23 @@ app.factory('thread', ['$http', function($http) {
         ],
 
         getThreadsByCategory: function (_id) {
-            var valid = [];
 
-            for(var i = 0; i < obj.threads.length; i++) {
-                if(obj.threads[i].category == _id) {
-                    valid.push(obj.threads[i]);
+            obj.threads = [];
+            
+            for(var i = 0; i < obj.testThreads.length; i++) {
+                if(obj.testThreads[i].category == _id) {
+                    obj.threads.push(obj.testThreads[i]);
                 }
             }
 
-            return valid;
+            return obj.threads;
+
+        },
+        addThread: function(thread) {
+            obj.testThreads.push(thread);
         }
+
+
     };
 
     return obj;
