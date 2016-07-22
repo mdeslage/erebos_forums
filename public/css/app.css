@@ -1,0 +1,16 @@
+.overlappedCard {
+  z-index: 2;
+  margin-top: -150px;
+}
+
+body {
+    background-color: #f0f0f0;
+}
+
+#mainTB {
+  padding-bottom: 200px;
+}
+
+.invert{
+    -webkit-filter: invert(100%);
+}

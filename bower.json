@@ -1,0 +1,21 @@
+{
+  "name": "erebos",
+  "description": "Web site/forums for the Erebos-Mal'Ganis raiding guild",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "^1.0.9",
+    "angular": "^1.5.7",
+    "angular-messages": "^1.5.7"
+  }
+}
