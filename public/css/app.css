@@ -14,3 +14,7 @@ body {
 .invert{
     -webkit-filter: invert(100%);
 }
+
+.md-fab.md-fab-bottom-right {
+  position: fixed !important;
+}

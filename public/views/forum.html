@@ -34,10 +34,23 @@
         <md-divider></md-divider>
         <md-card-content>
             
-            <div flex ng-repeat="cat in forum.categories" layout="column">
+            <md-list>
+                <md-list-item layout="column" layout-align="right none" ng-repeat="cat in forum.categories">
+                    <a ng-href="#/forum/category/{{ cat._id }}"><span class="md-headline">{{cat.name}}</span></a>
+                    <md-list>
+                    <md-list-item ng-repeat="thread in cat.recentThreads">
+                        <h3 class="md-subhead">{{ thread.title }}</h3>
+                        <md-divider class="inset"></md-divider>
+                    </md-list-item>
+                    </md-list>
+                </md-list-item>
+            </md-list>
+            
+            <!--<div flex ng-repeat="cat in forum.categories" layout="column">
                 <md-card-title>
                     <md-card-title-text>
                         <a ng-href="#/forum/category/{{ cat._id }}"><span class="md-headline">{{cat.name}}</span></a>
+                        
                     </md-card-title-text>
                 </md-card-title>
                 <br></br>
@@ -47,7 +60,7 @@
                         <md-divider class="inset"></md-divider>
                     </div>
                 </md-card-content>
-            </div> 
+            </div> -->
         </md-card-content>
     </md-card>
 </div>
