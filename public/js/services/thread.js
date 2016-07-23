@@ -81,6 +81,8 @@ app.factory('thread', ['$http', function($http) {
 
         },
         addThread: function(thread) {
+            console.log('got in here');
+            obj.threads.push(thread);
             obj.testThreads.push(thread);
         }
 

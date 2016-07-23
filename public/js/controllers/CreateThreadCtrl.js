@@ -33,6 +33,7 @@ function CreateThreadCtrl(category, thread, $stateParams, $location) {
         self.body = '';
 
         $location.path('/forum/category/' + id);
+        $location.replace();
     }
 }
 
