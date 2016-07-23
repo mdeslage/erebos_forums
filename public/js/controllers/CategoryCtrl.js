@@ -3,23 +3,17 @@ var app = angular.module('forumApp');
 
 app.controller('CategoryCtrl', CategoryCtrl);
 
-CategoryCtrl.$inject = ['thread', 'category', '$stateParams', '$mdDialog', '$location', '$scope'];
+CategoryCtrl.$inject = ['thread', 'category', '$stateParams', '$mdDialog', '$scope'];
 
-function CategoryCtrl(thread, category, $stateParams, $mdDialog, $location, $scope) {
+function CategoryCtrl(thread, category, $stateParams, $mdDialog, $scope) {
     var self = this;
 
     var id = $stateParams.id;
 
     self.threads = thread.getThreadsByCategory(id);
     self.category = category.getCategory(id);
-    self.title = 'Test';
-    self.body = '';
 
     var catName = self.category.name;
-
-    self.createThread = function () {
-        $location.path('/forum/category/' + id + '/create');
-    }
 
     function AddThreadController($scope, $mdDialog, thread) {
         

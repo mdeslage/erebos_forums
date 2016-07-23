@@ -2,23 +2,25 @@
     <md-card class="overlappedCard md-whiteframe-4dp" flex-gt-sm="80" flex-gt-md="70" flex-gt-lg="50" flex-gt-xl="40" flex-gt-xs="90" flex-xs="95">
         <md-card-header>
             <md-card-header-text>
-                <span class="md-headline">{{ cat.category.name }}</span>
+                <span class="md-headline">{{ thread.thread.title }}</span>
+                <p>{{ thread.thread.body }}</p>
             </md-card-header-text>
             
         </md-card-header>
         <md-divider></md-divider>
         <md-card-content>
             
-            <div ng-repeat="thread in cat.threads">
-                <a ng-href="#/forum/category/{{ cat._id }}/thread/{{thread._id}}">{{ thread.title }}</a>
+            <div ng-repeat="cmt in thread.thread.comments">
+                {{ cmt.body }} <br></br>
+                {{ cmt.author }}
             </div>
             
         </md-card-content>
     </md-card>
 </div>
-<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="cat.showAddThread($event)">
+<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="">
     <md-tooltip>
-        Create Thread
+        Reply
     </md-tooltip>  
-    <ng-md-icon icon="edit"></ng-md-icon>
+    <ng-md-icon icon="reply"></ng-md-icon>
 </md-button>
