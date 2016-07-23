@@ -48,6 +48,7 @@ function CategoryCtrl(thread, category, $stateParams, $mdDialog, $location, $sco
             thread.addThread({
                 title: $scope.title,
                 author: 'Mike',
+                body: $scope.body,
                 created: Date.now(),
                 category: id,
                 lastCommentAuthor: 'Mike',

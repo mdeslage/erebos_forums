@@ -22,8 +22,15 @@ app.config([
             // State for the threads in a category
             .state('category', {
                 url: '/forum/category/{id}',
-                templateUrl: '../views/threads.html',
-                controller: 'CategoryCtrl as category'
+                templateUrl: '../views/category.html',
+                controller: 'CategoryCtrl as cat'
+            })
+
+            // State for a thread and it's comments
+            .state('thread', {
+                url: '/forum/category/{id}/thread/{thread_id}',
+                templateUrl: '../views/thread.html',
+                controller: 'ThreadCtrl as thread'
             });
 
         $urlRouterProvider.otherwise('home');
