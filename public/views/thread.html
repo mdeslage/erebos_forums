@@ -9,16 +9,19 @@
         </md-card-header>
         <md-divider></md-divider>
         <md-card-content>
+            <span class="md-subhead">Replies: {{thread.replies}}</span>
             
             <div ng-repeat="cmt in thread.thread.comments">
+                <br></br>
                 {{ cmt.body }} <br></br>
-                {{ cmt.author }}
+                {{ cmt.author }} <br></br>
+                <md-divider></md-divider>
             </div>
             
         </md-card-content>
     </md-card>
 </div>
-<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="">
+<md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="thread.showAddComment($event)">
     <md-tooltip>
         Reply
     </md-tooltip>  

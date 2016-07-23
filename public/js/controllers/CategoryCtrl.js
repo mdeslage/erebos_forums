@@ -35,8 +35,6 @@ function CategoryCtrl(thread, category, $stateParams, $mdDialog, $scope) {
 
         $scope.createThread = function () {
 
-            console.log('In create thread');
-
             if($scope.body === '') { return; }
 
             thread.addThread({

@@ -154,7 +154,6 @@ app.factory('thread', ['$http', function($http) {
         },
 
         addThread: function(thread) {
-            console.log('got in here');
             obj.threads.push(thread);
             obj.testThreads.push(thread);
         },
@@ -162,7 +161,12 @@ app.factory('thread', ['$http', function($http) {
         getThread: function(_id) {
             // Just get it based on the id in the array for now
             return obj.testThreads[_id];
+        },
+
+        addComment: function(thread, comment) {
+            obj.testThreads[thread._id].comments.push(comment);
         }
+
 
 
     };
