@@ -24,13 +24,6 @@ app.config([
                 url: '/forum/category/{id}',
                 templateUrl: '../views/threads.html',
                 controller: 'CategoryCtrl as category'
-            })
-
-            // Page to create a new threads
-            .state('newThread', {
-                url: '/forum/category/{id}/create',
-                templateUrl: '../views/createThread.html',
-                controller: 'CreateThreadCtrl as createThread'
             });
 
         $urlRouterProvider.otherwise('home');
