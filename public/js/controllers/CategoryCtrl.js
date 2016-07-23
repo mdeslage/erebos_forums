@@ -94,7 +94,7 @@ function CategoryCtrl(thread, category, $stateParams, $mdDialog, $location, $sco
             '<span flex></span>' +
             '<md-button ng-click="cancel()">Cancel</md-button>' +
             '<md-button class="md-primary" ng-click="createThread()">Save</md-button>' +
-            '</div>' +
+            '</div><br></br>' +
             '</md-dialog>',
             targetEvent: ev
         });
