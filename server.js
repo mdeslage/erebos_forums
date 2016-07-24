@@ -4,6 +4,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var passport = require('passport');
+var mongoose = require('mongoose');
 
 // Configuration =========================================
 
@@ -13,7 +14,11 @@ var db = require('./config/db');
 var port = process.env.PORT || 3000;
 
 // Connection to mongodb
-//mongoose.connect(db.url);
+mongoose.connect(db.url);
+
+// Require the database models
+require('./app/models/User');
+require('./config/passport');
 
 // parse application/json 
 app.use(bodyParser.json()); 
@@ -33,6 +38,7 @@ app.use(express.static(__dirname + '/public'));
 // routes ==================================================
 var routes = require('./app/routes');
 app.use('/', routes);
+app.use(passport.initialize);
 
 // start app ===============================================
 // startup our app at http://localhost:3000

@@ -1,4 +1,4 @@
-// configuration for the database
+// config/db.js
 module.exports = {
     url: 'mongodb://localhost/erebos'
 }
