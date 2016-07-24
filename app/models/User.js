@@ -12,6 +12,7 @@ var UserSchema = new mongoose.Schema({
     },
     hash: String,
     salt: String,
+    email: String,
     permission_level: { type: Number, default: 0 }
 });
 
