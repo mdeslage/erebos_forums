@@ -37,7 +37,10 @@ function CategoryCtrl(thread, category, $stateParams, $mdDialog, $scope) {
 
             if($scope.body === '') { return; }
 
+            var thread_id = thread.testThreads.length;
+
             thread.addThread({
+                _id: thread_id,
                 title: $scope.title,
                 author: 'Mike',
                 body: $scope.body,
@@ -46,7 +49,13 @@ function CategoryCtrl(thread, category, $stateParams, $mdDialog, $scope) {
                 lastCommentAuthor: 'Mike',
                 lastCommentDate: Date.now(),
                 replies: 5,
-                views: 5
+                views: 5,
+                comments: [
+                    {
+                        body: 'This is the default test comment',
+                        author: 'Mike'
+                    }
+                ]
             });
 
             $scope.title = '';

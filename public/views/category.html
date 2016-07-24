@@ -11,6 +11,8 @@
             
             <div ng-repeat="thread in cat.threads">
                 <a ng-href="#/forum/category/{{ cat._id }}/thread/{{thread._id}}">{{ thread.title }}</a>
+                <p>Submitted by: {{ thread.author }}<p>
+                <md-divider></md-divider>
             </div>
             
         </md-card-content>
