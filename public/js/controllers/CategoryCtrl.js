@@ -94,8 +94,8 @@ function CategoryCtrl(thread, category, $stateParams, $mdDialog, $scope) {
             '</md-content>' +
             '<div class="md-dialog-actions" layout="row">'+
             '<span flex></span>' +
-            '<md-button ng-click="cancel()">Cancel</md-button>' +
-            '<md-button class="md-primary" ng-click="createThread()">Save</md-button>' +
+            '<md-button class="md-primary" ng-click="cancel()">Cancel</md-button>' +
+            '<md-button class="md-primary md-raised" ng-click="createThread()">Save</md-button>' +
             '</div><br></br>' +
             '</md-dialog>',
             targetEvent: ev

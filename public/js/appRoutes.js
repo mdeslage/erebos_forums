@@ -31,6 +31,13 @@ app.config([
                 url: '/forum/category/{id}/thread/{thread_id}',
                 templateUrl: '../views/thread.html',
                 controller: 'ThreadCtrl as thread'
+            })
+
+            // Login page for the application
+            .state('login', {
+                url: '/login',
+                templateUrl: '../views/login.html',
+                controller: 'AuthenticationCtrl as auth'
             });
 
         $urlRouterProvider.otherwise('home');
