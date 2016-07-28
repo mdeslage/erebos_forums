@@ -30,8 +30,9 @@ router.post('/register', function(req, res, next) {
 
 // POST login for a registered user
 router.post('/login', function(req, res, next) {
+
     if(!req.body.username || !req.body.password) {
-        return res.status(400).jjson({ message: 'Please fill out all fields' });
+        return res.status(400).json({ message: 'Please fill out all fields' });
     }
 
     passport.authenticate('local', function(err, user, info) {

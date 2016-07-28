@@ -17,20 +17,35 @@ app.config([
             .state('forum', {
                 url: '/forum',
                 templateUrl: '../views/forum.html',
-                controller: 'ForumCtrl as forum'
+                controller: 'ForumCtrl as forum',
+                onEnter: ['$location', 'auth', function($location, auth) {
+                    if(!auth.isLoggedIn()) {
+                        $location.path('/login');
+                    }
+                }]
             })
             // State for the threads in a category
             .state('category', {
                 url: '/forum/category/{id}',
                 templateUrl: '../views/category.html',
-                controller: 'CategoryCtrl as cat'
+                controller: 'CategoryCtrl as cat',
+                onEnter: ['$location', 'auth', function($location, auth) {
+                    if(!auth.isLoggedIn()) {
+                        $location.path('/login');
+                    }
+                }]
             })
 
             // State for a thread and it's comments
             .state('thread', {
                 url: '/forum/category/{id}/thread/{thread_id}',
                 templateUrl: '../views/thread.html',
-                controller: 'ThreadCtrl as thread'
+                controller: 'ThreadCtrl as thread',
+                onEnter: ['$location', 'auth', function($location, auth) {
+                    if(!auth.isLoggedIn()) {
+                        $location.path('/login');
+                    }
+                }]
             })
 
             // Login page for the application

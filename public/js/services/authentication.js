@@ -1,7 +1,7 @@
 // services/authentication.js
 var app = angular.module('forumApp');
 
-app.factory('auth', ['$http', '$window', function($http, $window) {
+app.factory('auth', ['$http', '$window', '$state', function($http, $window, $state) {
     var auth = {};
 
     auth.saveToken = function(token) {
@@ -27,7 +27,6 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
 
     // Returns and object with information pertaining to the current user
     auth.currentUser = function() {
-        console.log('In function');
         if(auth.isLoggedIn()) {
             var token = auth.getToken();
             var payload = JSON.parse($window.atob(token.split('.')[1]));
@@ -54,6 +53,7 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
 
     auth.logout = function() {
         $window.localStorage.removeItem('erebos-token');
+        $state.go('login');
     };
 
     return auth;
