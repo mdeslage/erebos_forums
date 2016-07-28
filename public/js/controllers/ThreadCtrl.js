@@ -3,9 +3,9 @@ var app = angular.module('forumApp');
 
 app.controller('ThreadCtrl', ThreadCtrl);
 
-ThreadCtrl.$inject = ['thread', '$stateParams', '$mdDialog', '$scope'];
+ThreadCtrl.$inject = ['thread', '$stateParams', '$mdDialog', '$scope', 'auth'];
 
-function ThreadCtrl(thread, $stateParams, $mdDialog, $scope) {
+function ThreadCtrl(thread, $stateParams, $mdDialog, $scope, auth) {
     var self = this;
     var threadId = $stateParams.thread_id;
     var currThread = thread.getThread(threadId);
@@ -34,7 +34,7 @@ function ThreadCtrl(thread, $stateParams, $mdDialog, $scope) {
 
             thread.addComment(currThread, {
                 body: $scope.body,
-                author: 'Mike'
+                author: auth.currentUser().username
             });
 
             $scope.body = '';

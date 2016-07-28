@@ -12,7 +12,7 @@
             
             <div ng-repeat="thread in cat.threads">
                 <a ng-href="#/forum/category/{{ cat._id }}/thread/{{thread._id}}">{{ thread.title }}</a>
-                <p>Submitted by: {{ thread.author }}<p>
+                <p>Submitted by: <span class="capitalize">{{ thread.author }}</span><p>
                 <md-divider></md-divider>
             </div>
             

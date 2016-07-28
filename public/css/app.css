@@ -29,3 +29,7 @@
 .primaryColor {
   color: #455A64;
 }
+
+.capitalize {
+   text-transform: capitalize;
+}

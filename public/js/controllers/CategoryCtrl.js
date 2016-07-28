@@ -3,9 +3,9 @@ var app = angular.module('forumApp');
 
 app.controller('CategoryCtrl', CategoryCtrl);
 
-CategoryCtrl.$inject = ['thread', 'category', '$stateParams', '$mdDialog', '$scope'];
+CategoryCtrl.$inject = ['thread', 'category', '$stateParams', '$mdDialog', '$scope', 'auth'];
 
-function CategoryCtrl(thread, category, $stateParams, $mdDialog, $scope) {
+function CategoryCtrl(thread, category, $stateParams, $mdDialog, $scope, auth) {
     var self = this;
 
     var id = $stateParams.id;
@@ -39,14 +39,16 @@ function CategoryCtrl(thread, category, $stateParams, $mdDialog, $scope) {
 
             var thread_id = thread.testThreads.length;
 
+            var uName = auth.currentUser().username;
+
             thread.addThread({
                 _id: thread_id,
                 title: $scope.title,
-                author: 'Mike',
+                author: uName,
                 body: $scope.body,
                 created: Date.now(),
                 category: id,
-                lastCommentAuthor: 'Mike',
+                lastCommentAuthor: uName,
                 lastCommentDate: Date.now(),
                 replies: 5,
                 views: 5,
