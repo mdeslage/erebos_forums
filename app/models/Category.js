@@ -1,5 +1,6 @@
 // app/models/Category.js
 var mongoose = require('mongoose');
+var Thread = mongoose.model('Thread');
 
 var CategorySchema = new mongoose.Schema(
     {
@@ -11,10 +12,10 @@ var CategorySchema = new mongoose.Schema(
             type: Number,
             default: 1,
         },
-        recentThreads: {
-            type: mongoose.Schema.ObjectId,
+        recentThreads: [{
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Thread'
-        },
+        }],
         numberOfThreads: {
             type: Number,
             default: 0
@@ -25,6 +26,12 @@ var CategorySchema = new mongoose.Schema(
 CategorySchema.methods.incrementNumThreads = function() {
     this.numberOfThreads++;
 };
+
+// Middleware to remove threads
+CategorySchema.pre('remove', function(next) {
+    Thread.remove({ category: this._id }).exec();
+    next();
+})
 
 var model = mongoose.model('Category', CategorySchema);
 

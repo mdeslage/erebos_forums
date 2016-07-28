@@ -8,16 +8,20 @@ var CommentSchema = new mongoose.Schema(
             required: true
         },
         reply_id: {
-            type: mongoose.Schema.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Comment'
         },
         author: {
-            type: mongoose.Schema.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         },
         date: {
             type: Date,
             default: Date.now
+        },
+        thread: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Thread'
         }
     }
 );

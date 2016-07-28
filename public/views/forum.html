@@ -12,7 +12,7 @@
             
             <md-list>
                 <md-list-item layout="column" layout-align="right none" ng-repeat="cat in forum.categories">
-                    <a ng-href="#/forum/category/{{ cat._id }}"><span class="md-headline">{{cat.name}}</span></a>
+                    <a ng-href="/forum/category/{{ cat._id }}"><span class="md-headline">{{cat.name}}</span></a>
                     <md-list>
                     <md-list-item ng-repeat="thread in cat.recentThreads">
                         <h3 class="md-subhead">{{ thread.title }}</h3>

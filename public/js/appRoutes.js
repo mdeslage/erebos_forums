@@ -4,7 +4,8 @@ var app = angular.module('forumApp');
 app.config([
     '$stateProvider',
     '$urlRouterProvider',
-    function ($stateProvider, $urlRouterProvider) {
+    '$locationProvider',
+    function ($stateProvider, $urlRouterProvider, $locationProvider) {
         
         $stateProvider
             // Default home state for the site
@@ -73,5 +74,8 @@ app.config([
             });
 
         $urlRouterProvider.otherwise('home');
+
+        // HTML5 History API to remove hashbang
+        $locationProvider.html5Mode(true);
     }
 ])

@@ -2,12 +2,58 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Thread = mongoose.model('Thread');
+var Comment = mongoose.model('Comment');
+var Category = mongoose.model('Category');
 var passport = require('passport');
 
 /* GET the home page */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
+
+
+/*DB ROUTES*********************************************************/
+/*CATEGORY**********************************************************/
+
+// Preloading the Category object
+router.param('category', function(req, res, next, id) {
+    var query = Category.findById(id);
+
+    query.exec(function(err, category) {
+        if(err) { return next(err); }
+        if(!category) {
+            return next(new Error('Cannot find category'));
+        }
+
+        req.category = category;
+        return next();
+    })
+});
+
+// GET all the categories w/ 5 recent threads
+router.get('/categories', function(req, res, next) {
+    Category.find().populate('recentThreads', 'title').exec(function(err, categories) {
+        if(err) { return next(err); }
+
+        res.json(categories);
+    })
+});
+
+// POST create a category
+router.post('/categories', function(req, res, next) {
+    var cat = new Category(req.body);
+
+    cat.save(function(err, cat) {
+        if (err) { return next(err); }
+
+        res.json(cat);
+    })
+});
+
+// DELETE remove a category and threads
+
+/*USER**************************************************************/
 
 // POST register a new user
 router.post('/register', function(req, res, next) {
@@ -45,5 +91,42 @@ router.post('/login', function(req, res, next) {
         }
     })(req, res, next);
 });
+
+// GET all the users
+router.get('/users', function(req, res, next) {
+    User.find().exec(function(err, users) {
+        if(err) { return next(err); }
+
+        res.json(users);
+    })
+})
+
+/*THREAD************************************************************/
+
+// POST create a thread
+router.post('/threads', function(req, res, next) {
+    var thread = new Thread(req.body);
+
+    thread.save(function(err, th) {
+        if(err) { return next(err); }
+
+        res.json(th);
+    })
+});
+
+// GET thread
+router.get('/threads', function(req, res, next) {
+    Thread.find()
+    .populate('category', 'name')
+    .populate('author', 'username')
+    .exec(function(err, threads) {
+        if(err) { return next(err); }
+
+        res.json(threads);
+    })
+})
+
+/*COMMENT***********************************************************/
+
 
 module.exports = router;

@@ -1,5 +1,6 @@
 // app/models/Thread.js
 var mongoose = require('mongoose');
+var Comment = mongoose.model('Comment');
 
 // Define the thread Schema
 var ThreadSchema = new mongoose.Schema(
@@ -9,7 +10,7 @@ var ThreadSchema = new mongoose.Schema(
             required: true
         },
         author: {
-            type: mongoose.Schema.ObjectId,
+            type: mongoose.Schema.Types.ObjectIdca,
             ref: 'User'
         },
         date: { type: Date, default: Date.now },
@@ -19,7 +20,7 @@ var ThreadSchema = new mongoose.Schema(
             ref: 'Comment'
         }],
         category: {
-            type: mongoose.Schema.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Category'
         },
         views: { type: Number, default: 0 },
@@ -35,6 +36,12 @@ ThreadSchema.methods.incrementViews = function() {
 ThreadSchema.methods.incrementReplies = function() {
     this.replies++;
 };
+
+// Middleware to remove comments
+ThreadSchema.pre('remove', function(next) {
+    Comment.remove({ thread: this._id }).exec();
+    next();
+})
 
 var model = mongoose.model('Thread', ThreadSchema);
 
