@@ -5,11 +5,11 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
     var auth = {};
 
     auth.saveToken = function(token) {
-        $window.localstorage['erebos-token'] = token;
+        $window.localStorage['erebos-token'] = token;
     };
 
     auth.getToken = function() {
-        return $window.localstorage['erebos-token'];
+        return $window.localStorage['erebos-token'];
     };
 
     auth.isLoggedIn = function() {
@@ -52,7 +52,7 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
     };
 
     auth.logout = function() {
-        $window.localstorage.removeItem('erebos-token');
+        $window.localStorage.removeItem('erebos-token');
     };
 
     return auth;

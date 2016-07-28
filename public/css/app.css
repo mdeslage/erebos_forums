@@ -19,3 +19,13 @@
 .md-fab.md-fab-bottom-right {
   position: fixed !important;
 }
+
+.authBg {
+  height:100%;
+  width: 100%;
+  background-color: #455A64;
+}
+
+.primaryColor {
+  color: #455A64;
+}

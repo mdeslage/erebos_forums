@@ -37,7 +37,24 @@ app.config([
             .state('login', {
                 url: '/login',
                 templateUrl: '../views/login.html',
-                controller: 'AuthenticationCtrl as auth'
+                controller: 'AuthenticationCtrl as auth',
+                onEnter: ['$state', 'auth', function($state, auth) {
+                    if(auth.isLoggedIn()) {
+                        $state.go('forum');
+                    }
+                }]
+            })
+
+            // Register page for the application
+            .state('register', {
+                url: '/login',
+                templateUrl: '../views/register.html',
+                controller: 'AuthenticationCtrl as auth',
+                onEnter: ['$state', 'auth', function($state, auth) {
+                    if(auth.isLoggedIn()) {
+                        $state.go('forum');
+                    }
+                }]
             });
 
         $urlRouterProvider.otherwise('home');
