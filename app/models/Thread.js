@@ -1,24 +1,39 @@
+// app/models/Thread.js
 var mongoose = require('mongoose');
 
 // Define the thread Schema
 var ThreadSchema = new mongoose.Schema(
     {
-        title: String,
-        author: String,
+        title: {
+            type: String,
+            required: true
+        },
+        author: {
+            type: mongoose.Schema.ObjectId,
+            ref: 'User'
+        },
         date: { type: Date, default: Date.now },
-        lastReplyDate: { type: Date, default: Date.now },
-        lastReplyAuthor: String,
+        body: String,
         comments: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Comment'
-        }]
+        }],
+        category: {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Category'
+        },
+        views: { type: Number, default: 0 },
+        replies: { type: Number, default: 0 },
+        permission_level: { type: Number, default: 1}
     }
 );
 
-// Update the last reply information
-ThreadSchema.methods.updateLastReply = function(name) {
-    this.lastReplyDate = Date.now;
-    this.lastReplyAuthor = name;
+ThreadSchema.methods.incrementViews = function() {
+    this.views++;
+};
+
+ThreadSchema.methods.incrementReplies = function() {
+    this.replies++;
 };
 
 var model = mongoose.model('Thread', ThreadSchema);
