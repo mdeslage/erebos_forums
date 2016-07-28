@@ -10,7 +10,7 @@ var ThreadSchema = new mongoose.Schema(
             required: true
         },
         author: {
-            type: mongoose.Schema.Types.ObjectIdca,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         },
         date: { type: Date, default: Date.now },
@@ -29,12 +29,14 @@ var ThreadSchema = new mongoose.Schema(
     }
 );
 
-ThreadSchema.methods.incrementViews = function() {
+ThreadSchema.methods.incrementViews = function(cb) {
     this.views++;
+    this.save(cb);
 };
 
-ThreadSchema.methods.incrementReplies = function() {
+ThreadSchema.methods.incrementReplies = function(cb) {
     this.replies++;
+    this.save(cb);
 };
 
 // Middleware to remove comments

@@ -23,8 +23,9 @@ var CategorySchema = new mongoose.Schema(
     }
 );
 
-CategorySchema.methods.incrementNumThreads = function() {
+CategorySchema.methods.incrementNumThreads = function(cb) {
     this.numberOfThreads++;
+    this.save(cb);
 };
 
 // Middleware to remove threads

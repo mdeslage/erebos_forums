@@ -18,8 +18,8 @@ mongoose.connect(db.url);
 
 // Require the database models
 require('./app/models/User');
-require('./app/models/Thread');
 require('./app/models/Comment');
+require('./app/models/Thread');
 require('./app/models/Category');
 require('./config/passport');
 

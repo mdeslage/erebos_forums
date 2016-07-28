@@ -45,15 +45,52 @@ router.post('/categories', function(req, res, next) {
     var cat = new Category(req.body);
 
     cat.save(function(err, cat) {
-        if (err) { return next(err); }
+        if(err) { return next(err); }
 
         res.json(cat);
     })
 });
 
 // DELETE remove a category and threads
+router.delete('/categories/:category/delete', function(req, res, next) {
+    req.category.remove(function(err, cat) {
+        if(err) { return next(err); }
+
+        res.json(cat);
+    })
+});
+
+// UPDATE a category
+router.put('/categories/:category/update', function(req, res, next) {
+    // Update the name and permission level
+    req.category.name = req.body.name;
+    req.category.permission_level = req.body.permission_level;
+
+    req.category.save(function(err, cat) {
+        if(err) { return next(err); }
+
+        res.json(cat);
+    })
+
+});
+
 
 /*USER**************************************************************/
+
+// Preloading the User object
+router.param('user', function(req, res, next, id) {
+    var query = User.findById(id);
+
+    query.exec(function(err, user) {
+        if(err) { return next(err); }
+        if(!user) {
+            return next(new Error('Cannot find user'));
+        }
+
+        req.user = user;
+        return next();
+    })
+});
 
 // POST register a new user
 router.post('/register', function(req, res, next) {
@@ -99,9 +136,50 @@ router.get('/users', function(req, res, next) {
 
         res.json(users);
     })
-})
+});
+
+// DELETE a user
+router.delete('/users/:user/delete', function(req, res, next) {
+    req.user.remove(function(err, user) {
+        if(err) { return next(err); }
+
+        res.json(user);
+    })
+});
+
+// UPDATE a user
+router.put('/users/:user/update', function(req, res, next) {
+    // Update the password, email, permission_level
+    // Add support for changing the password soon
+    //req.user.setPassword(req.body.password);
+    req.user.permission_level = req.body.permission_level;
+    req.user.email = req.body.email;
+
+    req.category.save(function(err, cat) {
+        if(err) { return next(err); }
+
+        res.json(cat);
+    })
+
+});
 
 /*THREAD************************************************************/
+
+// Preloading the Thread object
+router.param('thread', function(req, res, next, id) {
+    var query = Thread.findById(id);
+
+    query.exec(function(err, user) {
+        if(err) { return next(err); }
+        if(!thread) {
+            return next(new Error('Cannot find thread'));
+        }
+
+        req.thread = thread;
+        return next();
+    })
+});
+
 
 // POST create a thread
 router.post('/threads', function(req, res, next) {
@@ -114,19 +192,92 @@ router.post('/threads', function(req, res, next) {
     })
 });
 
-// GET thread
+// GET all threads
 router.get('/threads', function(req, res, next) {
     Thread.find()
-    .populate('category', 'name')
-    .populate('author', 'username')
     .exec(function(err, threads) {
         if(err) { return next(err); }
 
         res.json(threads);
     })
-})
+});
+
+// GET all threads by category
+router.get('/threads/:category', function(req, res, next) {
+    Thread.find({ category: req.category._id })
+    .exec(function(err, threads) {
+        if(err) { return next(err); }
+
+        res.json(threads);
+    })
+});
+
+// DELETE a thread
+router.delete('/threads/:thread/delete', function(req, res, next) {
+    req.user.remove(function(err, thread) {
+        if(err) { return next(err); }
+
+        res.json(thread);
+    })
+});
+
 
 /*COMMENT***********************************************************/
 
+// Preloading the Comment object
+router.param('Comment', function(req, res, next, id) {
+    var query = Comment.findById(id);
+
+    query.exec(function(err, comment) {
+        if(err) { return next(err); }
+        if(!comment) {
+            return next(new Error('Cannot find comment'));
+        }
+
+        req.comment = comment;
+        return next();
+    })
+});
+
+
+// POST create a comment
+router.post('/comments', function(req, res, next) {
+    var comment = new Comment(req.body);
+
+    comment.save(function(err, comment) {
+        if(err) { return next(err); }
+
+        res.json(comment);
+    })
+});
+
+// GET all comments
+router.get('/comments', function(req, res, next) {
+    Comment.find()
+    .exec(function(err, comments) {
+        if(err) { return next(err); }
+
+        res.json(comments);
+    })
+});
+
+// GET all comments by thread
+router.get('/comments/:thread', function(req, res, next) {
+    Comment.find({ thread: req.thread._id })
+    .exec(function(err, comments) {
+        if(err) { return next(err); }
+
+        res.json(comments);
+    })
+});
+
+// DELETE a comment
+router.delete('/comments/:comment/delete', function(req, res, next) {
+    req.comment.remove(function(err, comment) {
+        if(err) { return next(err); }
+
+        res.json(comment);
+    })
+});
 
 module.exports = router;
