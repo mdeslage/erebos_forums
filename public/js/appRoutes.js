@@ -38,21 +38,21 @@ app.config([
                 url: '/login',
                 templateUrl: '../views/login.html',
                 controller: 'AuthenticationCtrl as auth',
-                onEnter: ['$state', 'auth', function($state, auth) {
+                onEnter: ['$location', 'auth', function($location, auth) {
                     if(auth.isLoggedIn()) {
-                        $state.go('forum');
+                        $location.path('/forum');
                     }
                 }]
             })
 
             // Register page for the application
             .state('register', {
-                url: '/login',
+                url: '/register',
                 templateUrl: '../views/register.html',
                 controller: 'AuthenticationCtrl as auth',
-                onEnter: ['$state', 'auth', function($state, auth) {
+                onEnter: ['$location', 'auth', function($location, auth) {
                     if(auth.isLoggedIn()) {
-                        $state.go('forum');
+                        $location.path('/forum');
                     }
                 }]
             });

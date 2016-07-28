@@ -27,6 +27,7 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
 
     // Returns and object with information pertaining to the current user
     auth.currentUser = function() {
+        console.log('In function');
         if(auth.isLoggedIn()) {
             var token = auth.getToken();
             var payload = JSON.parse($window.atob(token.split('.')[1]));

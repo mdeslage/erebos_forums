@@ -38,7 +38,7 @@ app.use(express.static(__dirname + '/public'));
 // routes ==================================================
 var routes = require('./app/routes');
 app.use('/', routes);
-app.use(passport.initialize);
+app.use(passport.initialize());
 
 // start app ===============================================
 // startup our app at http://localhost:3000
