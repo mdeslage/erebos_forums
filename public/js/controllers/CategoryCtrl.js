@@ -13,6 +13,10 @@ function CategoryCtrl(thread, category, $stateParams, $mdDialog, $scope, auth) {
     self.threads = thread.getThreadsByCategory(id);
     self.category = category.getCategory(id);
 
+    self.noThreads = function() {
+        return self.threads.length === 0;
+    }
+
     var catName = self.category.name;
 
     function AddThreadController($scope, $mdDialog, thread) {

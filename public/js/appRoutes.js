@@ -23,7 +23,12 @@ app.config([
                     if(!auth.isLoggedIn()) {
                         $location.path('/login');
                     }
-                }]
+                }],
+                resolve: {
+                    categories: ['category', function(category) {
+                        return category.getAll();
+                    }]
+                }
             })
             // State for the threads in a category
             .state('category', {

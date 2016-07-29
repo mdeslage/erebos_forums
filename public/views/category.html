@@ -15,6 +15,10 @@
                 <p>Submitted by: <span class="capitalize">{{ thread.author }}</span><p>
                 <md-divider></md-divider>
             </div>
+
+            <div ng-show="cat.noThreads()" layout-align="center center">
+                <span class="md-subhead">There are no threads in this category</span>
+            </div>
             
         </md-card-content>
     </md-card>

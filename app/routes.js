@@ -42,6 +42,8 @@ router.get('/categories', function(req, res, next) {
 
 // POST create a category
 router.post('/categories', function(req, res, next) {
+    
+    console.log(req.body);
     var cat = new Category(req.body);
 
     cat.save(function(err, cat) {
