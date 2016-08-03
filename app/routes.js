@@ -206,7 +206,7 @@ router.get('/threads', function(req, res, next) {
 });
 
 // GET all threads by category
-router.get('/threads/:category', function(req, res, next) {
+router.get('/threads/category/:category', function(req, res, next) {
     Thread.find({ category: req.category._id })
     .populate('author')
     .exec(function(err, threads) {
