@@ -56,7 +56,12 @@ app.config([
                     if(!auth.isLoggedIn()) {
                         $location.path('/login');
                     }
-                }]
+                }],
+                resolve: {
+                    currThread: ['thread', '$stateParams', function(thread, $stateParams) {
+                        return thread.getThread($stateParams.thread_id);
+                    }]
+                }
             })
 
             // Login page for the application

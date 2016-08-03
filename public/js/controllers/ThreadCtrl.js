@@ -8,11 +8,9 @@ ThreadCtrl.$inject = ['thread', '$stateParams', '$mdDialog', '$scope', 'auth'];
 function ThreadCtrl(thread, $stateParams, $mdDialog, $scope, auth) {
     var self = this;
     var threadId = $stateParams.thread_id;
-    var currThread = thread.getThread(threadId);
+    self.currThread = thread.currentThread;
 
-    self.thread = currThread;
-
-    self.replies = self.thread.comments.length;
+    self.replies = self.currThread.comments.length;
 
     function AddCommentController($scope, $mdDialog, thread) {
 

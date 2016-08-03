@@ -36,7 +36,6 @@ router.get('/categories', function(req, res, next) {
     Category.find().populate('recentThreads.title').exec(function(err, categories) {
         if(err) { return next(err); }
 
-        console.log(categories)
         res.json(categories);
     })
 });
@@ -172,7 +171,7 @@ router.put('/users/:user/update', function(req, res, next) {
 router.param('thread', function(req, res, next, id) {
     var query = Thread.findById(id);
 
-    query.exec(function(err, user) {
+    query.exec(function(err, thread) {
         if(err) { return next(err); }
         if(!thread) {
             return next(new Error('Cannot find thread'));
@@ -218,7 +217,7 @@ router.get('/threads/category/:category', function(req, res, next) {
 
 // GET single thread from id
 router.get('/threads/:thread', function(req, res, next) {
-    req.thread.populate('category', function(err, thread) {
+    req.thread.populate('category author', function(err, thread) {
         if(err) { return next(err); }
         
         res.json(thread);
