@@ -23,6 +23,7 @@ var ThreadSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Category'
         },
+        lastCommentDate: { type: Date, default: Date.now },
         views: { type: Number, default: 0 },
         replies: { type: Number, default: 0 },
         permission_level: { type: Number, default: 1}

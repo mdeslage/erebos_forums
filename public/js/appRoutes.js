@@ -39,7 +39,12 @@ app.config([
                     if(!auth.isLoggedIn()) {
                         $location.path('/login');
                     }
-                }]
+                }],
+                resolve: {
+                    threads: ['thread', '$stateParams', function(thread, $stateParams) {
+                        return thread.getThreadsByCategory($stateParams.id);
+                    }]
+                }
             })
 
             // State for a thread and it's comments

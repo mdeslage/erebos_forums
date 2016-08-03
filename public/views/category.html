@@ -12,12 +12,13 @@
             
             <div ng-repeat="thread in cat.threads">
                 <a ng-href="/forum/category/{{ cat._id }}/thread/{{thread._id}}">{{ thread.title }}</a>
-                <p>Submitted by: <span class="capitalize">{{ thread.author }}</span><p>
+                <p>Submitted by: <span class="capitalize">{{ thread.author.username }}</span><p>
                 <md-divider></md-divider>
             </div>
 
             <div ng-show="cat.noThreads()" layout-align="center center">
-                <span class="md-subhead">There are no threads in this category</span>
+                <p class="md-subhead">There are no threads in this category</p>
+                <p class="md-subhead">Click below to add one</p>
             </div>
             
         </md-card-content>

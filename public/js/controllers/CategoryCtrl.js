@@ -10,7 +10,7 @@ function CategoryCtrl(thread, category, $stateParams, $mdDialog, $scope, auth) {
 
     var id = $stateParams.id;
 
-    self.threads = thread.getThreadsByCategory(id);
+    self.threads = thread.threads;
     self.category = category.getCategory(id);
 
     self.noThreads = function() {
@@ -41,27 +41,14 @@ function CategoryCtrl(thread, category, $stateParams, $mdDialog, $scope, auth) {
 
             if($scope.body === '') { return; }
 
-            var thread_id = thread.testThreads.length;
-
-            var uName = auth.currentUser().username;
+            var user = auth.currentUser()._id;
 
             thread.addThread({
-                _id: thread_id,
                 title: $scope.title,
-                author: uName,
+                author: user,
                 body: $scope.body,
-                created: Date.now(),
                 category: id,
-                lastCommentAuthor: uName,
-                lastCommentDate: Date.now(),
-                replies: 5,
-                views: 5,
-                comments: [
-                    {
-                        body: 'This is the default test comment',
-                        author: 'Mike'
-                    }
-                ]
+                comments: []
             });
 
             $scope.title = '';

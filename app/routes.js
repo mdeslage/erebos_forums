@@ -33,9 +33,10 @@ router.param('category', function(req, res, next, id) {
 
 // GET all the categories w/ 5 recent threads
 router.get('/categories', function(req, res, next) {
-    Category.find().populate('recentThreads', 'title').exec(function(err, categories) {
+    Category.find().populate('recentThreads.title').exec(function(err, categories) {
         if(err) { return next(err); }
 
+        console.log(categories)
         res.json(categories);
     })
 });
@@ -207,10 +208,20 @@ router.get('/threads', function(req, res, next) {
 // GET all threads by category
 router.get('/threads/:category', function(req, res, next) {
     Thread.find({ category: req.category._id })
+    .populate('author')
     .exec(function(err, threads) {
         if(err) { return next(err); }
 
         res.json(threads);
+    })
+});
+
+// GET single thread from id
+router.get('/threads/:thread', function(req, res, next) {
+    req.thread.populate('category', function(err, thread) {
+        if(err) { return next(err); }
+        
+        res.json(thread);
     })
 });
 
