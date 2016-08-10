@@ -15,7 +15,7 @@ function ThreadCtrl(thread, $stateParams, $mdDialog, $scope, auth) {
     function AddCommentController($scope, $mdDialog, thread) {
 
         $scope.body = '';
-        $scope.title = currThread.title;
+        $scope.title = self.currThread.title;
         
         $scope.hide = function () {
             $scope.body = '';
@@ -30,9 +30,10 @@ function ThreadCtrl(thread, $stateParams, $mdDialog, $scope, auth) {
         $scope.addComment = function() {
             if($scope.body === '') { return; }
 
-            thread.addComment(currThread, {
+            thread.addComment({
                 body: $scope.body,
-                author: auth.currentUser().username
+                author: auth.currentUser()._id,
+                thread: self.currThread._id
             });
 
             $scope.body = '';

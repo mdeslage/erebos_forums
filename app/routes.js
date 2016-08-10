@@ -217,7 +217,7 @@ router.get('/threads/category/:category', function(req, res, next) {
 
 // GET single thread from id
 router.get('/threads/:thread', function(req, res, next) {
-    req.thread.populate('category author', function(err, thread) {
+    req.thread.populate('category author comments', function(err, thread) {
         if(err) { return next(err); }
         
         res.json(thread);
@@ -258,9 +258,15 @@ router.post('/comments', function(req, res, next) {
 
     comment.save(function(err, comment) {
         if(err) { return next(err); }
+        // populate the name of the user
+        Comment.findById(comment._id)
+            .populate('author', 'username')
+            .exec(function(err, cmt) {
+                if(err) { return next(err); }
 
-        res.json(comment);
-    })
+                res.json(cmt);
+            });
+    });
 });
 
 // GET all comments

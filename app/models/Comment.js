@@ -9,7 +9,8 @@ var CommentSchema = new mongoose.Schema(
         },
         reply_id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Comment'
+            ref: 'Comment',
+            default: null
         },
         author: {
             type: mongoose.Schema.Types.ObjectId,

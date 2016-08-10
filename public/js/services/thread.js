@@ -20,17 +20,15 @@ app.factory('thread', ['$http', function($http) {
         getThread: function(_id) {
             // Just get it based on the id in the array for now
             return $http.get('/threads/' + _id).success(function(data) {
-                console.log(data);
                 angular.copy(data, obj.currentThread);
             });
         },
 
-        addComment: function(thread, comment) {
-            obj.testThreads[thread._id].comments.push(comment);
+        addComment: function(comment) {
+            return $http.post('/comments', comment).success(function(data) {
+                obj.currentThread.comments.push(data);
+            });
         }
-
-
-
     };
 
     return obj;
