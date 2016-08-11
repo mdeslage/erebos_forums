@@ -1,17 +1,18 @@
 <div class="authBg" layout="row" layout-align="center center">
-    <md-card flex-gt-sm="40" flex-gt-md="30" flex-gt-lg="20" flex-gt-xl="15" flex-gt-xs="70" flex-xs="90">
+    <md-card layout="column" flex-gt-sm="40" flex-gt-md="30" flex-gt-lg="20" flex-gt-xl="15" flex-gt-xs="70" flex-xs="90">
         <md-card-header>
             <md-card-header-text>
-                <span class="md-headline primaryColor"><b><u>LOGIN</u></b></span>
+                <span class="md-headline primaryColor"><b>EREBOS</b> Forums</span>
             </md-card-header-text>
         </md-card-header>
         <md-card-content>
-            <div ng-show="auth.error">
+            <div ng-show="auth.error" class="padded">
                 <span>{{ auth.error.message }}</span>
             </div>
             <form name="loginForm">
                 <md-input-container class="md-block">
                     <label>Username</label>
+                    <md-icon md-font-library="material-icons">person</md-icon>
                     <input type="text" name="username" ng-model="auth.user.username" required>
                     <div ng-messages="loginForm.username.$error">
                         <div ng-message="required">Username is required</div>
@@ -19,21 +20,20 @@
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Password</label>
+                    <md-icon md-font-library="material-icons">lock</md-icon>
                     <input type="password" name="password" ng-model="auth.user.password" required>
                     <div ng-messages="loginForm.password.$error">
                         <div ng-message="required">Password is required</div>
                     </div>
                 </md-input-container>
             </form>
+            <md-button class="md-raised md-accent" ng-click="auth.login()">Login</md-button>
+            <br></br>
             <div layout="row">
                 <span class="md-caption">Register</span>
                 <span flex></span>
                 <span class="md-caption">Forgot your password?</span>
             </div>
             </md-card-content>
-        <md-card-action layout="row">
-            <md-button class="md-raised md-accent" flex="100" ng-click="auth.login()">Go</md-button>
-            <br></br>
-        </md-card-action>
     </md-card>
 </div>

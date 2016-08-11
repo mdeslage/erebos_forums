@@ -33,10 +33,23 @@ router.param('category', function(req, res, next, id) {
 
 // GET all the categories w/ 5 recent threads
 router.get('/categories', function(req, res, next) {
-    Category.find().populate('recentThreads.title').exec(function(err, categories) {
+    Category.find().exec(function(err, categories) {
         if(err) { return next(err); }
-
-        res.json(categories);
+        // Get 5 recent threads for each category
+        categories.forEach(function(cat, index) {
+            Thread.find({ category: cat._id })
+                .populate('author', 'username')
+                .limit(5)
+                .sort({ date: -1 })
+                .exec(function(err, threads) {
+                    if(err) { return next(err); }
+                    categories[index].recentThreads = threads;
+                    // Add response here because of async db 
+                    if (index == categories.length - 1) {
+                        res.json(categories);
+                    }
+            })
+        });
     })
 });
 
@@ -169,7 +182,7 @@ router.put('/users/:user/update', function(req, res, next) {
 
 // Preloading the Thread object
 router.param('thread', function(req, res, next, id) {
-    var query = Thread.findById(id);
+    var query = Thread.findById(id).populate('author', 'username');
 
     query.exec(function(err, thread) {
         if(err) { return next(err); }
@@ -197,6 +210,7 @@ router.post('/threads', function(req, res, next) {
 // GET all threads
 router.get('/threads', function(req, res, next) {
     Thread.find()
+    .populate('author', 'username')
     .exec(function(err, threads) {
         if(err) { return next(err); }
 
