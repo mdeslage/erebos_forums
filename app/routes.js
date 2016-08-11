@@ -182,7 +182,9 @@ router.put('/users/:user/update', function(req, res, next) {
 
 // Preloading the Thread object
 router.param('thread', function(req, res, next, id) {
-    var query = Thread.findById(id).populate('author', 'username');
+    var query = Thread.findById(id)
+    .populate('author', 'username')
+    .populate('category', 'name');
 
     query.exec(function(err, thread) {
         if(err) { return next(err); }
@@ -231,19 +233,16 @@ router.get('/threads/category/:category', function(req, res, next) {
 
 // GET single thread from id
 router.get('/threads/:thread', function(req, res, next) {
-    req.thread.populate('category author', function(err, thread) {
-        if(err) { return next(err); }
-        // Add the comments to the thread. Can't get populate to work
-        Comment.find({ thread: thread._id })
+    // Add the comments to the thread. Can't get populate to work
+        Comment.find({ thread: req.thread._id })
             .populate('author', 'username')
             .exec(function(err, comments) {
             if(err) { return next(err); }
             
-            thread.comments = comments;
+            req.thread.comments = comments;
 
-            res.json(thread);
+            res.json(req.thread);
         });
-    });
 });
 
 // DELETE a thread

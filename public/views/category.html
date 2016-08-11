@@ -1,28 +1,33 @@
 <div forum-toolbar></div>
 <div layout="row" layout-align="center none">
-    <md-card class="overlappedCard md-whiteframe-4dp" flex-gt-sm="80" flex-gt-md="70" flex-gt-lg="50" flex-gt-xl="40" flex-gt-xs="90" flex-xs="95">
-        <md-card-header>
-            <md-card-header-text>
-                <span class="md-headline">{{ cat.category.name }}</span>
-            </md-card-header-text>
-            
-        </md-card-header>
-        <md-divider></md-divider>
-        <md-card-content>
-            
-            <div ng-repeat="thread in cat.threads">
-                <a ng-href="/forum/category/{{ cat._id }}/thread/{{thread._id}}">{{ thread.title }}</a>
-                <p>Submitted by: <span class="capitalize">{{ thread.author.username }}</span><p>
-                <md-divider></md-divider>
-            </div>
+    <div flex-gt-sm="80" flex-gt-md="70" flex-gt-lg="50" flex-gt-xl="40" flex-gt-xs="90" flex-xs="95">
+        <div layout-padding class="breadcrumbBar">
+            <span layout-padding class="md-body-1">Forums / {{ cat.category.name }}</span>
+        </div>
+        <md-card class="overlappedCard md-whiteframe-2dp">
+            <md-card-header>
+                <md-card-header-text>
+                    <span class="md-headline">{{ cat.category.name }}</span>
+                </md-card-header-text>
+                
+            </md-card-header>
+            <md-divider></md-divider>
+            <md-card-content>
+                
+                <div ng-repeat="thread in cat.threads">
+                    <a ng-href="/forum/category/{{ cat._id }}/thread/{{thread._id}}">{{ thread.title }}</a>
+                    <p>Submitted by: <span class="capitalize">{{ thread.author.username }}</span><p>
+                    <md-divider></md-divider>
+                </div>
 
-            <div ng-show="cat.noThreads()" layout-align="center center">
-                <p class="md-subhead">There are no threads in this category</p>
-                <p class="md-subhead">Click below to add one</p>
-            </div>
-            
-        </md-card-content>
-    </md-card>
+                <div ng-show="cat.noThreads()" layout-align="center center">
+                    <p class="md-subhead">There are no threads in this category</p>
+                    <p class="md-subhead">Click below to add one</p>
+                </div>
+                
+            </md-card-content>
+        </md-card>
+    </div>
 </div>
 <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="cat.showAddThread($event)">
     <md-tooltip>
