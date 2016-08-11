@@ -207,7 +207,7 @@ router.get('/threads', function(req, res, next) {
 // GET all threads by category
 router.get('/threads/category/:category', function(req, res, next) {
     Thread.find({ category: req.category._id })
-    .populate('author')
+    .populate('author', 'username')
     .exec(function(err, threads) {
         if(err) { return next(err); }
 
@@ -217,11 +217,19 @@ router.get('/threads/category/:category', function(req, res, next) {
 
 // GET single thread from id
 router.get('/threads/:thread', function(req, res, next) {
-    req.thread.populate('category author comments', function(err, thread) {
+    req.thread.populate('category author', function(err, thread) {
         if(err) { return next(err); }
-        
-        res.json(thread);
-    })
+        // Add the comments to the thread. Can't get populate to work
+        Comment.find({ thread: thread._id })
+            .populate('author', 'username')
+            .exec(function(err, comments) {
+            if(err) { return next(err); }
+            
+            thread.comments = comments;
+
+            res.json(thread);
+        });
+    });
 });
 
 // DELETE a thread

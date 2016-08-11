@@ -43,6 +43,11 @@ var routes = require('./app/routes');
 app.use('/', routes);
 app.use(passport.initialize());
 
+
+app.all('/*', function(req, res){
+    res.sendFile(__dirname + '/public/index.html');
+});
+
 // start app ===============================================
 // startup our app at http://localhost:3000
 app.listen(port);               

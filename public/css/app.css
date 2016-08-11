@@ -1,15 +1,6 @@
-.overlappedCard {
-  z-index: 2;
-  margin-top: -150px;
-}
-
 #bodyGrey {
     background-color: #f0f0f0;
     height: 100%;
-}
-
-#mainTB {
-  padding-bottom: 200px;
 }
 
 .invert{
@@ -32,4 +23,8 @@
 
 .capitalize {
    text-transform: capitalize;
+}
+
+.shortToolbar {
+  min-height: 20px;
 }
