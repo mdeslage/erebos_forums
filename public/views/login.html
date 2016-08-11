@@ -27,13 +27,14 @@
                     </div>
                 </md-input-container>
             </form>
-            <md-button class="md-raised md-accent" ng-click="auth.login()">Login</md-button>
-            <br></br>
-            <div layout="row">
-                <span class="md-caption">Register</span>
-                <span flex></span>
-                <span class="md-caption">Forgot your password?</span>
-            </div>
-            </md-card-content>
+        </md-card-content>
+        <md-card-action layout="row">
+            <md-button class="md-raised md-accent" flex="100" ng-click="auth.login()">Login</md-button>
+        </md-card-action>
+        <md-card-content>
+            <span class="md-caption"><a href="/register">Register</a></span>
+            <span flex></span>
+            <!--<span class="md-caption">Forgot your password?</span>-->
+        </md-card-content>
     </md-card>
 </div>

@@ -1,8 +1,8 @@
 <div class="authBg" layout="row" layout-align="center center">
-    <md-card flex="30">
+    <md-card layout="column" flex-gt-sm="40" flex-gt-md="30" flex-gt-lg="20" flex-gt-xl="15" flex-gt-xs="70" flex-xs="90">
         <md-card-header>
             <md-card-header-text>
-                <span class="md-headline primaryColor"><b><u>REGISTER</u></b></span>
+                <span class="md-headline primaryColor"><b>EREBOS</b> Forums</span>
             </md-card-header-text>
         </md-card-header>
         <md-card-content>
@@ -12,6 +12,7 @@
             <form name="registerForm">
                 <md-input-container class="md-block">
                     <label>Username</label>
+                    <md-icon md-font-library="material-icons">person</md-icon>
                     <input type="text" name="username" ng-model="auth.user.username" required>
                     <div ng-messages="registerForm.username.$error">
                         <div ng-message="required">Username is required</div>
@@ -19,6 +20,7 @@
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Password</label>
+                    <md-icon md-font-library="material-icons">lock</md-icon>
                     <input type="password" name="password" ng-model="auth.user.password" required>
                     <div ng-messages="registerForm.password.$error">
                         <div ng-message="required">Required</div>
@@ -26,6 +28,7 @@
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Confirm Password</label>
+                    <md-icon md-font-library="material-icons">lock</md-icon>
                     <input type="password" name="passwordConfirm" ng-model="auth.user.passwordConfirm" required>
                     <div ng-messages="registerForm.passwordConfirm.$error">
                         <div ng-message="required">Required</div>
@@ -33,6 +36,7 @@
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Email</label>
+                    <md-icon md-font-library="material-icons">email</md-icon>
                     <input type="text" name="email" ng-model="auth.user.email" required>
                     <div ng-messages="registerForm.email.$error">
                         <div ng-message="required">Required</div>
@@ -41,8 +45,10 @@
             </form>
             </md-card-content>
         <md-card-action layout="row">
-            <md-button class="md-raised md-accent" flex="100" ng-click="auth.register()">Sign Up</md-button>
-            <br></br>
+            <md-button class="md-raised md-accent" flex="100" ng-click="auth.register()">Register</md-button>
         </md-card-action>
+        <md-card-content>
+            <span class="md-caption"><a href="/login">Back to Login</a></span>
+        </md-card-content>
     </md-card>
 </div>
