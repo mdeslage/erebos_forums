@@ -17,6 +17,11 @@ function CategoryCtrl(thread, category, $stateParams, $mdDialog, $scope, auth) {
         return self.threads.length === 0;
     }
 
+    self.toDateString = function(date) {
+        var newDate = new Date(date);
+        return newDate.toLocaleDateString() + ' ' + newDate.toLocaleTimeString();
+    }
+
     var catName = self.category.name;
 
     function AddThreadController($scope, $mdDialog, thread) {

@@ -12,6 +12,5 @@
                 .accentPalette('teal')
                 
         });
-    
 })();
 
