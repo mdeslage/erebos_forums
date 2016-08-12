@@ -28,3 +28,12 @@
 .shortToolbar {
   min-height: 20px;
 }
+
+.catName {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.breadcrumbBar {
+  margin-top: 10px;
+}

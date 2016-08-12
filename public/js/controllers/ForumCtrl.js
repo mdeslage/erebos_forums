@@ -10,6 +10,11 @@ function ForumCtrl(category, $mdDialog) {
 
     self.categories = category.categories;
 
+    self.toDateString = function(date) {
+        var newDate = new Date(date);
+        return newDate.toLocaleDateString() + ' ' + newDate.toLocaleTimeString();
+    }
+
     function AddCategoryController($scope, $mdDialog, category) {
 
         $scope.name = "";
