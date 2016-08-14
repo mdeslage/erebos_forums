@@ -4,23 +4,55 @@
         <div layout-padding class="breadcrumbBar">
             <span layout-padding class="md-body-1"><a ng-href="/forum">Forums</a> / <a ng-href="/forum/category/{{ thread.currThread.category._id }}">{{ thread.currThread.category.name }}</a> / {{ thread.currThread.title }}</span>
         </div>
-        <md-card class="overlappedCard md-whiteframe-2dp">
-            <md-card-header>
+        <md-card>
+            <md-card-header class="no-bottom-padding">
                 <md-card-header-text>
-                    <p class="md-headline threadTitle">{{ thread.currThread.title }}</p>
-                    <span>Submitted by: <span class="capitalize">{{ thread.currThread.author.username }}</span></span>
-                    <span>{{ thread.currThread.date | date:'short'}}</span> 
-                    <p>{{ thread.currThread.body }}</p>
-                </md-card-header-text>  
+                    <div layout="row">
+                        <div flex="90">
+                            <span class="md-headline">{{ thread.currThread.title }}</span>
+                        </div>
+                        <div flex></div>
+                        <div flex="nogrow">
+                            <ng-md-icon icon="more_vert"></ng-md-icon>
+                        </div>
+                    </div>
+                </md-card-header-text>
             </md-card-header>
+            <md-card-header class="no-padding-bottom">
+                <md-card-avatar class="right-margin">
+                        <img src="/img/name-icons/S.png" class="md-user-avatar">
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title capitalize">{{ thread.currThread.author.username }}</span>
+                    <span class="md-subhead">{{ thread.currThread.date | date:'short'}}</span>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-content>
+                <p>{{ thread.currThread.body }}</p>
+            </md-card-content>
         </md-card>
         <div layout-padding>
             <span layout-padding class="md-body-1">Replies: {{ thread.replies }}</span>
         </div>
         <md-card ng-repeat="cmt in thread.currThread.comments">
+            <md-card-header>
+                <md-card-avatar>
+                    <img src="/img/name-icons/S.png" class="md-user-avatar">
+                </md-card-avatar>
+                <md-card-header-text>
+                    <div layout="row">
+                        <div flex="90" layout="column">
+                            <span class="capitalize md-title">{{ cmt.author.username }}</span>
+                            <span class="md-subhead">{{ cmt.date | date:'short'}}</span>
+                        </div>
+                        <div flex></div>
+                        <div flex="nogrow">
+                            <ng-md-icon icon="more_vert"></ng-md-icon>
+                        </div>
+                    </div>
+                </md-card-header-text>
+            </md-card-header>
             <md-card-content>
-                    <span class="capitalize md-headline">{{ cmt.author.username }}</span>
-                    <p class="md-caption">{{ cmt.date | date:'short'}}</p> 
                 <p>{{ cmt.body }}</p>
             </md-card-content>
         </md-card>

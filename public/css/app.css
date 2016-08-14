@@ -51,3 +51,12 @@ a:hover {
   margin-top: 0dp;
   margin-bottom: 10dp;
 }
+
+.no-bottom-padding {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.right-margin {
+  margin-right: 12px;
+}
