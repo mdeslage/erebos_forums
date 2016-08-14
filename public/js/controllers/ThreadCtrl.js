@@ -50,8 +50,7 @@ function ThreadCtrl(thread, $stateParams, $mdDialog, $scope, auth) {
             template:
             '<md-dialog flex="80" flex-xs="90" flex-lg="60" flex-xl="50">' +
             '<md-content class="md-padding">' +
-            '<span class="md-headline">Add Comment</span>' +
-            '<md-divider></md-divider><br></br>' +
+            '<p class="md-headline">Add Comment</p>' +
             '<form name="newCommentForm">' +
             '<md-input-container class="md-block">' +
             '<label>Thread</label>' +
