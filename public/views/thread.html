@@ -14,8 +14,8 @@
                 </md-card-header-text>  
             </md-card-header>
         </md-card>
-        <div layout-padding ng-show="{{ thread.replies }}">
-            <span layout-padding class="md-body-1">Replies</span>
+        <div layout-padding>
+            <span layout-padding class="md-body-1">Replies: {{ thread.replies }}</span>
         </div>
         <md-card ng-repeat="cmt in thread.currThread.comments">
             <md-card-content>

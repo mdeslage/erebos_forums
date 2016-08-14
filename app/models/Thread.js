@@ -37,6 +37,7 @@ ThreadSchema.methods.incrementViews = function(cb) {
 
 ThreadSchema.methods.incrementReplies = function(cb) {
     this.replies++;
+    this.lastCommentDate = Date.now();
     this.save(cb);
 };
 

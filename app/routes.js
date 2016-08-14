@@ -259,7 +259,8 @@ router.delete('/threads/:thread/delete', function(req, res, next) {
 
 // Preloading the Comment object
 router.param('Comment', function(req, res, next, id) {
-    var query = Comment.findById(id);
+    var query = Comment.findById(id)
+        .populate(thread);
 
     query.exec(function(err, comment) {
         if(err) { return next(err); }
@@ -279,6 +280,13 @@ router.post('/comments', function(req, res, next) {
 
     comment.save(function(err, comment) {
         if(err) { return next(err); }
+        // increment the number of comments for the thread
+        // Update the last comment date
+        Thread.findById(comment.thread).exec(function(err, thread) {
+            if(err) { return next(err); }
+            thread.incrementReplies();
+        });
+
         // populate the name of the user
         Comment.findById(comment._id)
             .populate('author', 'username')

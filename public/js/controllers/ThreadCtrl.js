@@ -11,6 +11,7 @@ function ThreadCtrl(thread, $stateParams, $mdDialog, $scope, auth) {
     self.currThread = thread.currentThread;
 
     self.replies = self.currThread.comments.length;
+    self.replyText = "";
 
     function AddCommentController($scope, $mdDialog, thread) {
 
