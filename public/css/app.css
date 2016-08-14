@@ -46,3 +46,8 @@ a {
 a:hover {
   color:#808080;
 }
+
+.threadTitle {
+  margin-top: 0dp;
+  margin-bottom: 10dp;
+}
