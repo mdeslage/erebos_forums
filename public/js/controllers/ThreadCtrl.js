@@ -13,6 +13,10 @@ function ThreadCtrl(thread, $stateParams, $mdDialog, $scope, auth) {
     self.replies = self.currThread.comments.length;
     self.replyText = "";
 
+    self.getImagePath = function(uname) {
+        return '/img/name-icons/' + uname.charAt(0).toUpperCase() + '.png';
+    }
+
     function AddCommentController($scope, $mdDialog, thread) {
 
         $scope.body = '';
