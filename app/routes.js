@@ -6,6 +6,14 @@ var Thread = mongoose.model('Thread');
 var Comment = mongoose.model('Comment');
 var Category = mongoose.model('Category');
 var passport = require('passport');
+var jwt = require('express-jwt');
+
+// Authentication middleware
+var auth = jwt({
+    // Change the secret so it's not hardcoded'
+    secret: 'EREBOS',
+    userProperty: 'payload'
+});
 
 /* GET the home page */
 router.get('/', function(req, res, next) {
@@ -53,10 +61,14 @@ router.get('/categories', function(req, res, next) {
     })
 });
 
+// GET a single category
+router.get('/categories/:category', function(req, res, next) {
+    res.json(req.category);
+})
+
 // POST create a category
-router.post('/categories', function(req, res, next) {
+router.post('/categories', auth, function(req, res, next) {
     
-    console.log(req.body);
     var cat = new Category(req.body);
 
     cat.save(function(err, cat) {
@@ -67,7 +79,7 @@ router.post('/categories', function(req, res, next) {
 });
 
 // DELETE remove a category and threads
-router.delete('/categories/:category/delete', function(req, res, next) {
+router.delete('/categories/:category/delete', auth, function(req, res, next) {
     req.category.remove(function(err, cat) {
         if(err) { return next(err); }
 
@@ -76,7 +88,7 @@ router.delete('/categories/:category/delete', function(req, res, next) {
 });
 
 // UPDATE a category
-router.put('/categories/:category/update', function(req, res, next) {
+router.put('/categories/:category/update', auth, function(req, res, next) {
     // Update the name and permission level
     req.category.name = req.body.name;
     req.category.permission_level = req.body.permission_level;
@@ -145,7 +157,7 @@ router.post('/login', function(req, res, next) {
 });
 
 // GET all the users
-router.get('/users', function(req, res, next) {
+router.get('/users', auth, function(req, res, next) {
     User.find().exec(function(err, users) {
         if(err) { return next(err); }
 
@@ -154,7 +166,7 @@ router.get('/users', function(req, res, next) {
 });
 
 // DELETE a user
-router.delete('/users/:user/delete', function(req, res, next) {
+router.delete('/users/:user/delete', auth, function(req, res, next) {
     req.user.remove(function(err, user) {
         if(err) { return next(err); }
 
@@ -163,7 +175,7 @@ router.delete('/users/:user/delete', function(req, res, next) {
 });
 
 // UPDATE a user
-router.put('/users/:user/update', function(req, res, next) {
+router.put('/users/:user/update', auth, function(req, res, next) {
     // Update the password, email, permission_level
     // Add support for changing the password soon
     //req.user.setPassword(req.body.password);
@@ -199,8 +211,9 @@ router.param('thread', function(req, res, next, id) {
 
 
 // POST create a thread
-router.post('/threads', function(req, res, next) {
+router.post('/threads', auth, function(req, res, next) {
     var thread = new Thread(req.body);
+    thread.author = req.payload._id;
 
     thread.save(function(err, th) {
         if(err) { return next(err); }
@@ -246,7 +259,7 @@ router.get('/threads/:thread', function(req, res, next) {
 });
 
 // DELETE a thread
-router.delete('/threads/:thread/delete', function(req, res, next) {
+router.delete('/threads/:thread/delete', auth, function(req, res, next) {
     req.user.remove(function(err, thread) {
         if(err) { return next(err); }
 
@@ -275,8 +288,9 @@ router.param('Comment', function(req, res, next, id) {
 
 
 // POST create a comment
-router.post('/comments', function(req, res, next) {
+router.post('/comments', auth, function(req, res, next) {
     var comment = new Comment(req.body);
+    comment.author = req.payload._id;
 
     comment.save(function(err, comment) {
         if(err) { return next(err); }
@@ -299,7 +313,7 @@ router.post('/comments', function(req, res, next) {
 });
 
 // GET all comments
-router.get('/comments', function(req, res, next) {
+router.get('/comments', auth, function(req, res, next) {
     Comment.find()
     .exec(function(err, comments) {
         if(err) { return next(err); }
@@ -319,7 +333,7 @@ router.get('/comments/:thread', function(req, res, next) {
 });
 
 // DELETE a comment
-router.delete('/comments/:comment/delete', function(req, res, next) {
+router.delete('/comments/:comment/delete', auth, function(req, res, next) {
     req.comment.remove(function(err, comment) {
         if(err) { return next(err); }
 

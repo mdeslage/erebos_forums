@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
-var uuid = require('node-uuid');
+var db = require('./../../config/db');
 
 var UserSchema = new mongoose.Schema({
     username: {
@@ -34,8 +34,8 @@ UserSchema.methods.generateJWT = function() {
     var expire = new Date(today);
     expire.setDate(today.getDate() + 60);
 
-    // Create the secret using node-uuid
-    var secret = uuid.v4();
+    // Change this to not be hardcoded
+    var secret = 'EREBOS';
 
     return jwt.sign({
         _id: this._id,

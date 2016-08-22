@@ -41,9 +41,13 @@ app.config([
                     }
                 }],
                 resolve: {
+                    currentCategory: ['category', '$stateParams', function(category, $stateParams) {
+                        return category.getCategory($stateParams.id);
+                    }],
                     threads: ['thread', '$stateParams', function(thread, $stateParams) {
                         return thread.getThreadsByCategory($stateParams.id);
                     }]
+                    
                 }
             })
 

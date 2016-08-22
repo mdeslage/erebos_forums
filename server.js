@@ -7,7 +7,6 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 
 // Configuration =========================================
-
 var db = require('./config/db');
 
 // Set the port

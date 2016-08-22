@@ -1,7 +1,7 @@
 //services/thread.js
 var app = angular.module('forumApp');
 
-app.factory('thread', ['$http', function($http) {
+app.factory('thread', ['$http', 'auth', function($http, auth) {
     var obj = {
         threads: [],
         currentThread: {},
@@ -12,7 +12,9 @@ app.factory('thread', ['$http', function($http) {
         },
 
         addThread: function(thread) {
-            return $http.post('/threads', thread).success(function(data) {
+            return $http.post('/threads', thread, {
+                headers: { Authorization: 'Bearer ' + auth.getToken() }
+            }).success(function(data) {
                 obj.threads.push(data);
             });
         },
@@ -25,7 +27,9 @@ app.factory('thread', ['$http', function($http) {
         },
 
         addComment: function(comment) {
-            return $http.post('/comments', comment).success(function(data) {
+            return $http.post('/comments', comment, {
+                headers: { Authorization: 'Bearer ' + auth.getToken() }
+            }).success(function(data) {
                 obj.currentThread.comments.push(data);
             });
         }
