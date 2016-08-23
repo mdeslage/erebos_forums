@@ -11,7 +11,6 @@ function CategoryCtrl(thread, category, $stateParams, $mdDialog, $scope, auth) {
     var id = $stateParams.id;
 
     self.threads = thread.threads;
-    console.log(category);
     self.category = category.currentCategory;
 
     self.noThreads = function() {
