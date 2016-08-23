@@ -3,9 +3,9 @@ var app = angular.module('forumApp');
 
 app.controller('NavCtrl', NavCtrl);
 
-NavCtrl.$inject = ['auth', '$window'];
+NavCtrl.$inject = ['auth', '$state'];
 
-function NavCtrl(auth, $window) {
+function NavCtrl(auth, $state) {
     var self = this;
 
     self.isLoggedIn = auth.isLoggedIn();

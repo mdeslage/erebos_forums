@@ -1,0 +1,15 @@
+<md-list class="no-padding">
+    <md-list-item class="md-3-line" ng-repeat="thread in $ctrl.threads" ng-click="$ctrl.goToThread(thread.category, thread._id)">
+        <img ng-src="{{ $ctrl.getImagePath(thread.author.username) }}" class="md-avatar">
+        <div class="md-list-item-text" layout="column">
+            <h3>{{ thread.title }}</h3>
+            <h4>Submitted by: <span class="capitalize">{{ thread.author.username }}</span></h4>
+            <p>{{ thread.date | date:'short' }}</p>
+        </div>
+        <div flex></div>
+        <div flex="nogrow">
+            <md-icon md-font-library="material-icons">comment</md-icon>
+            <span>{{ thread.replies }}
+        </div>
+    </md-list-item>
+</md-list>

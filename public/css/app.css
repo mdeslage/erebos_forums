@@ -29,11 +29,6 @@
   min-height: 20px;
 }
 
-.catName {
-  padding-left: 0;
-  margin-left: 0;
-}
-
 .breadcrumbBar {
   margin-top: 10px;
 }
@@ -59,4 +54,9 @@ a:hover {
 
 .right-margin {
   margin-right: 12px;
+}
+
+.no-side-padding {
+  padding-left: 0px;
+  padding-right: 0px;
 }

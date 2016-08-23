@@ -1,6 +1,5 @@
-<div forum-toolbar></div>
 <div layout="row" layout-align="center none" flex>
-    <div flex-gt-sm="80" flex-gt-md="70" flex-gt-lg="50" flex-gt-xl="40" flex-gt-xs="90" flex-xs="95">
+    <div flex-gt-sm="80" flex-gt-md="70" flex-gt-lg="50" flex-gt-xl="40" flex-gt-xs="90" flex-xs="100">
         <div layout-padding class="breadcrumbBar">
             <span layout-padding class="md-body-1"><a ng-href="/forum">Forums</a></span>
         </div>
@@ -11,26 +10,10 @@
                 </md-card-header-text>
             </md-card-header>
             <md-divider></md-divider>
-            <md-card-content>
+            <md-card-content class="no-side-padding">
                 <div ng-repeat="cat in forum.categories">
                     <md-button class="catName" ng-href="/forum/category/{{ cat._id }}"><span class="md-headline">{{cat.name}}</span></md-button>
-                    <div ng-repeat="thread in cat.recentThreads">
-                        <div layout="row">
-                            <div flex="80">
-                                <a ng-href="/forum/category/{{ cat._id }}/thread/{{thread._id}}">{{ thread.title }}</a>
-                                <p class="md-caption">Submitted by: <span class="capitalize">{{ thread.author.username }}</span></p>
-                                <p class="md-caption">{{ forum.toDateString(thread.date) }}</p>
-                            </div>
-                            <div flex></div>
-                            <div flex="nogrow">
-                                <md-icon md-font-library="material-icons">comment</md-icon>
-                                <span>{{ thread.replies }}
-                            </div>
-                        </div>
-                        
-                        <md-divider></md-divider>
-                        <br>
-                    </div>
+                    <thread-list threads="cat.recentThreads"></thread-list>
                 </div>
             </md-card-content>
         </md-card>

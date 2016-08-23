@@ -12,6 +12,7 @@
 </head>
 
 <body ng-app="forumApp" ng-controller="MainCtrl as main" layout="column" layout-fill>
+    <div forum-toolbar ng-hide="$state.includes('login') || $state.includes('register')"></div>
     <md-content id="bodyGrey">
         <ui-view></ui-view>
     </md-content>
@@ -31,6 +32,7 @@
     <script src="./js/controllers/AuthenticationCtrl.js"></script>
     <script src="./js/controllers/NavCtrl.js"></script>
     <script src="./js/directives/forumToolbar.js"></script>
+    <script src="./js/directives/threadList.js"></script>
     <script src="./js/services/category.js"></script>
     <script src="./js/services/thread.js"></script>
     <script src="./js/services/authentication.js"></script>

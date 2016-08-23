@@ -217,8 +217,11 @@ router.post('/threads', auth, function(req, res, next) {
 
     thread.save(function(err, th) {
         if(err) { return next(err); }
+        Thread.populate(th, {path: "author"}, function(err, thr) {
+            if(err) { return next(err); }
 
-        res.json(th);
+            res.json(thr);
+        });
     })
 });
 
