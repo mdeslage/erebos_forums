@@ -336,7 +336,7 @@ router.get('/comments/:thread', function(req, res, next) {
 });
 
 // DELETE a comment
-router.delete('/comments/:comment/delete', auth, function(req, res, next) {
+router.delete('/comments/:comment', auth, function(req, res, next) {
     req.comment.remove(function(err, comment) {
         if(err) { return next(err); }
 

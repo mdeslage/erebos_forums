@@ -32,6 +32,14 @@ app.factory('thread', ['$http', 'auth', function($http, auth) {
             }).success(function(data) {
                 obj.currentThread.comments.push(data);
             });
+        },
+
+        deleteComment: function(comment) {
+            // Do we want a handle to the comment being removed?
+            return $http.delete('/comments/' + comment._id).success(function(data) {
+                var index = obj.currentThread.comments.indexOf(data);
+                obj.currentThread.comments.splice(index, 1);
+            });
         }
     };
 
