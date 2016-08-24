@@ -44,6 +44,9 @@ router.get('/categories', function(req, res, next) {
     Category.find().exec(function(err, categories) {
         if(err) { return next(err); }
         // Get 5 recent threads for each category
+        if(categories.length === 0) {
+            res.json(categories);
+        }
         categories.forEach(function(cat, index) {
             Thread.find({ category: cat._id })
                 .populate('author', 'username')
@@ -67,7 +70,7 @@ router.get('/categories/:category', function(req, res, next) {
 })
 
 // POST create a category
-router.post('/categories', auth, function(req, res, next) {
+router.post('/categories', function(req, res, next) {
     
     var cat = new Category(req.body);
 
@@ -157,7 +160,7 @@ router.post('/login', function(req, res, next) {
 });
 
 // GET all the users
-router.get('/users', auth, function(req, res, next) {
+router.get('/users', function(req, res, next) {
     User.find().exec(function(err, users) {
         if(err) { return next(err); }
 
